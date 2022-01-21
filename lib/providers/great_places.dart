@@ -37,6 +37,8 @@ class GreatPlaces with ChangeNotifier {
       },
     );
   }
+
+
 Future<void> fetchandSetDb()async{
   print('........ aiane jamela');
  final dataList=await DbHelper.fetchDb('places');
