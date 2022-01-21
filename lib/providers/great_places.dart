@@ -44,12 +44,13 @@ Future<void> fetchandSetDb()async{
  final dataList=await DbHelper.fetchDb('places');
 
 final placesList= dataList.map((place){
-   Place(id: place['id'], title: place['title'], image: File(place['image'],),);
+  return Place(id: place['id'], title: place['title'], image: File(place['image'],),);
  }).toList();
 
 if(placesList==null){
   return;
 }
-_places=placesList.cast();
+_places=placesList;
+notifyListeners();
 }
 }
