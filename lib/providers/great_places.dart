@@ -13,21 +13,15 @@ class GreatPlaces with ChangeNotifier {
   }
 
   void addPlace(String title, File image) {
-    print('........................');
     Place newPlace = Place(
       id: DateTime.now().toString(),
       title: title,
       image: image,
     );
     
-    print('.........................');
-    print(newPlace.id);
-    print(newPlace.title);
-    print(newPlace.image.path);
     
     _places.add(newPlace);
     notifyListeners();
-    print('.........................');
     DbHelper.insert(
       'places',
       {
@@ -40,16 +34,12 @@ class GreatPlaces with ChangeNotifier {
 
 
 Future<void> fetchandSetDb()async{
-  print('........ aiane jamela');
  final dataList=await DbHelper.fetchDb('places');
 
 final placesList= dataList.map((place){
   return Place(id: place['id'], title: place['title'], image: File(place['image'],),);
  }).toList();
 
-if(placesList==null){
-  return;
-}
 _places=placesList;
 notifyListeners();
 }

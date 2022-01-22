@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 class LocationInput extends StatefulWidget {
   const LocationInput({Key? key}) : super(key: key);
@@ -8,7 +9,14 @@ class LocationInput extends StatefulWidget {
 }
 
 class _LocationInputState extends State<LocationInput> {
-  late String _locationPreviewUrl;
+    String _locationPreviewUrl ='';
+
+Future<void> _userCurrentLocationData() async{
+  final location= await Location().getLocation();
+  print(location.latitude);
+  print(location.longitude);
+}
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,7 +28,7 @@ class _LocationInputState extends State<LocationInput> {
             border: Border.all(width: 1, color: Colors.greenAccent),
           ),
           alignment: Alignment.center,
-          child: _locationPreviewUrl == null
+          child: _locationPreviewUrl==''
               ? Text(
                   'Input a location!',
                   textAlign: TextAlign.center,
@@ -35,15 +43,17 @@ class _LocationInputState extends State<LocationInput> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             FlatButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.location_on),
-                label: Text('Curent location'),
-                textColor: Theme.of(context).accentColor,),
+              onPressed: () {},
+              icon: Icon(Icons.location_on),
+              label: Text('Curent location'),
+              textColor: Theme.of(context).accentColor,
+            ),
             FlatButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.map),
-                label: Text('Pick a location'),
-                textColor: Theme.of(context).accentColor,)
+              onPressed: () {},
+              icon: Icon(Icons.map),
+              label: Text('Pick a location'),
+              textColor: Theme.of(context).accentColor,
+            ),
           ],
         )
       ],
